@@ -96,9 +96,7 @@ def render(scene: Scene, quite: bool = False):
         for i, y in enumerate(np.linspace(screen[1], screen[3], scene.res[1]))
     ]
 
-    with tqdm(total=scene.res[1] * scene.res[0], unit='px', disable=quite,
-              bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}, {rate_fmt}{postfix}]"  # custom bar format to not include the ETA
-              ) as pbar:
+    with tqdm(total=scene.res[1] * scene.res[0], unit='px', disable=quite) as pbar:
         with Pool() as p:
             for i, column in enumerate(p.imap(_render_column, arguments)):
                 image[i] = column
